@@ -61,7 +61,8 @@ OLLAMA_MODEL=llama3.2
 MIT License - Created by [Amrut Raibagi](https://github.com/Aamrutraibagi)
 
 
-Steps of prompts given:
+
+## Steps of prompts given:
 
 1. BLAST.md can you please start the phase 0 ,
 
