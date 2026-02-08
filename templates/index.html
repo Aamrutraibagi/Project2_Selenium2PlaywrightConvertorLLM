@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.L.A.S.T. | Selenium to Playwright Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tokyo-night-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            /* Slate 900 */
+        }
+
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.1);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        code {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen text-slate-200">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-12">
+            <div>
+                <h1 class="text-4xl font-bold tracking-tight">
+                    <span class="gradient-text">B.L.A.S.T.</span> Converter
+                </h1>
+                <p class="text-slate-400 mt-2">Selenium Java to Playwright TS/JS</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span
+                    class="px-3 py-1 bg-slate-800 rounded-full text-xs font-semibold text-slate-400 border border-slate-700 uppercase tracking-widest">Local
+                    Ollama</span>
+                <span
+                    class="px-3 py-1 bg-slate-800 rounded-full text-xs font-semibold text-slate-400 border border-slate-700">v1.1.0</span>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Input Side -->
+            <div class="flex flex-col space-y-4">
+                <div
+                    class="flex justify-between items-center px-4 py-2 bg-slate-800/50 rounded-t-xl border-x border-t border-slate-700">
+                    <span class="text-sm font-semibold flex items-center">
+                        <svg class="w-4 h-4 mr-2 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M10 2a8 8 0 100 16 8 8 0 000-16zM5.94 5.5s.31-.5.56-.5h7c.25 0 .56.5.56.5L16 12s0 2.5-3 2.5H7c-3 0-3-2.5-3-2.5l1.94-6.5z">
+                            </path>
+                        </svg>
+                        Selenium Java
+                    </span>
+                    <button id="clear-btn"
+                        class="text-xs text-slate-500 hover:text-slate-300 transition-colors uppercase font-bold tracking-tighter">Clear</button>
+                </div>
+                <textarea id="java-input"
+                    class="w-full h-[500px] p-6 glass rounded-b-xl focus:ring-2 focus:ring-indigo-500 outline-none text-sm font-mono custom-scrollbar resize-none"
+                    placeholder="public class SeleniumTest { ... }"></textarea>
+            </div>
+
+            <!-- Output Side -->
+            <div class="flex flex-col space-y-4">
+                <div
+                    class="flex justify-between items-center px-4 py-2 bg-slate-800/50 rounded-t-xl border-x border-t border-slate-700">
+                    <span class="text-sm font-semibold flex items-center">
+                        <svg class="w-4 h-4 mr-2 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM5.884 6.923a1 1 0 10-1.414-1.414l-.707.707a1 1 0 101.414 1.414l.707-.707zm11.314 0l.707-.707a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414zM5 11a1 1 0 100-2H4a1 1 0 100 2h1zm11 0a1 1 0 100-2h-1a1 1 0 100 2h1zM8.99 14a1 1 0 100 2v1a1 1 0 102 0v-1a1 1 0 10-2 0zm6.126-1.192a1 1 0 001.414 1.414l.707-.707a1 1 0 00-1.414-1.414l-.707.707zM4.464 12.808l-.707.707a1 1 0 001.414 1.414l.707-.707a1 1 0 00-1.414-1.414z">
+                            </path>
+                        </svg>
+                        Playwright TS
+                    </span>
+                    <div class="flex space-x-4">
+                        <button id="copy-btn"
+                            class="text-xs text-slate-500 hover:text-slate-300 transition-colors uppercase font-bold tracking-tighter">Copy</button>
+                        <button id="download-btn"
+                            class="text-xs text-slate-500 hover:text-slate-300 transition-colors uppercase font-bold tracking-tighter">Download</button>
+                    </div>
+                </div>
+                <div class="w-full h-[500px] glass rounded-b-xl custom-scrollbar overflow-auto">
+                    <pre><code id="ts-output" class="language-typescript text-sm p-6 block h-full">// Converted code will appear here...</code></pre>
+                </div>
+            </div>
+        </main>
+
+        <!-- Action Section -->
+        <div class="mt-12 flex flex-col items-center space-y-6">
+            <button id="convert-btn"
+                class="px-12 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-indigo-500/20 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">
+                Convert to Playwright
+            </button>
+            <div id="status-display" class="hidden text-sm animate-pulse text-indigo-400 font-medium">
+                Designing deterministic playwright flow...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const convertBtn = document.getElementById('convert-btn');
+        const javaInput = document.getElementById('java-input');
+        const tsOutput = document.getElementById('ts-output');
+        const statusDisplay = document.getElementById('status-display');
+        const copyBtn = document.getElementById('copy-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const downloadBtn = document.getElementById('download-btn');
+
+        convertBtn.addEventListener('click', async () => {
+            const javaCode = javaInput.value;
+            if (!javaCode.trim()) {
+                alert('Please paste some Java code first.');
+                return;
+            }
+
+            // UI State
+            convertBtn.disabled = true;
+            statusDisplay.classList.remove('hidden');
+            tsOutput.innerText = '// Processing conversion...';
+            hljs.highlightElement(tsOutput);
+
+            try {
+                const response = await fetch('/convert', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code: javaCode })
+                });
+
+                const result = await response.json();
+
+                if (result.converted_code) {
+                    tsOutput.innerText = result.converted_code;
+                } else {
+                    tsOutput.innerText = `// Error: ${result.error || 'Conversion failed'}`;
+                }
+            } catch (error) {
+                tsOutput.innerText = `// Error: Network failure`;
+            } finally {
+                convertBtn.disabled = false;
+                statusDisplay.classList.add('hidden');
+                hljs.highlightElement(tsOutput);
+            }
+        });
+
+        copyBtn.addEventListener('click', () => {
+            const text = tsOutput.innerText;
+            if (text && !text.includes('// Converted code will appear here')) {
+                navigator.clipboard.writeText(text);
+                const originalText = copyBtn.innerText;
+                copyBtn.innerText = 'Copied!';
+                copyBtn.classList.add('text-green-400');
+                setTimeout(() => {
+                    copyBtn.innerText = originalText;
+                    copyBtn.classList.remove('text-green-400');
+                }, 2000);
+            }
+        });
+
+        clearBtn.addEventListener('click', () => {
+            javaInput.value = '';
+            tsOutput.innerText = '// Converted code will appear here...';
+            hljs.highlightElement(tsOutput);
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            const text = tsOutput.innerText;
+            if (text && !text.includes('// Converted code will appear here')) {
+                const blob = new Blob([text], { type: 'text/javascript' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'playwright_test.spec.ts';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+        });
+
+        // Initial highlight
+        hljs.highlightElement(tsOutput);
+    </script>
+</body>
+
+</html>
