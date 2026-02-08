@@ -63,11 +63,9 @@ MIT License - Created by [Amrut Raibagi](https://github.com/Aamrutraibagi)
 
 Steps of prompts given:
 
-1. 
-BLAST.md
- can you please start the phase 0 ,
+1. BLAST.md can you please start the phase 0 ,
 
-we are developing selniu to playwright  , java script/Type Script convertor
+we are developing selenium to playwright  , java script/Type Script convertor
 
 2. North Star - we are developing Selenium Java to Pylywright with Java Script / TypeScript Convertor
 
